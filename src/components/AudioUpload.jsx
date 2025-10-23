@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-const AudioUpload = ({ onAudioLoad, currentAudioUrl }) => {
+const gigiAudioUpload = ({ onAudioLoad, currentAudioUrl }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
