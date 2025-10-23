@@ -42,11 +42,11 @@ function App() {
       />
       <Canvas camera={{ position: [0.5, 5, 10] }}>
         <UpdateSceneBackground />
-        <axesHelper args={[10]} />
-        <gridHelper args={[20, 20, 0xff22aa, 0x55ccff]} />
-        <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
-          <GizmoViewport />
-        </GizmoHelper>
+        {/* <axesHelper args={[10]} />
+        <gridHelper args={[20, 20, 0xff22aa, 0x55ccff]} /> */}
+        {/* <GizmoHelper alignment="bottom-right" margin={[80, 80]}> */}
+        {/* <GizmoViewport /> */}
+        {/* </GizmoHelper> */}
         <OrbitControls />
         <Experience audioUrl={audioUrl} />
       </Canvas>
