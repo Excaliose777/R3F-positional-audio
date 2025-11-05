@@ -93,14 +93,19 @@ export const vertexShader = /* glsl */ `
   }
 
 uniform float u_frequency;
-
+varying vec3 vNormal;
+varying vec3 vPosition;
 uniform float u_time;
+
+
 void main() {
+  vNormal = normalize(normalMatrix * normal);
   float noise = 5. * pnoise(position + u_time, vec3(10.));
-
+  
   float displacement = (u_frequency / 30.) * (noise / 10.);
-
+  
   vec3 newPosition = position + normal * displacement;
+  vPosition = newPosition;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 }
 `;

@@ -10,11 +10,11 @@ import AudioUpload from "./components/AudioUpload";
 function UpdateSceneBackground() {
   const { scene } = useThree();
 
-  const { color } = useControls({
-    color: "#000000",
-  });
+  // const { color } = useControls({
+  //   color: "#000000",
+  // });
 
-  scene.background = new Color(color);
+  scene.background = new Color("#000000");
 
   return null;
 }

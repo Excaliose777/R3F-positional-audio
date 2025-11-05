@@ -10,10 +10,12 @@ const Experience = ({ audioUrl }) => {
   const meshRef = useRef();
   const audioRef = useRef();
   const analyserRef = useRef();
+  const innerMeshRef = useRef();
 
   const uniforms = useRef({
     uTime: { value: 0 },
     u_frequency: { value: 0 },
+    color: { value: new THREE.Color(0x6ba7cc) },
   }).current;
 
   useEffect(() => {
@@ -35,6 +37,9 @@ const Experience = ({ audioUrl }) => {
   useFrame(({ clock }) => {
     const elapsedTime = clock.getElapsedTime();
     if (meshRef.current) meshRef.current.rotation.y = elapsedTime * 0.1;
+
+    if (innerMeshRef.current)
+      innerMeshRef.current.rotation.y = -elapsedTime * 0.1;
     uniforms.uTime.value = elapsedTime;
 
     uniforms.u_frequency.value = analyserRef.current.getAverageFrequency();
@@ -56,22 +61,29 @@ const Experience = ({ audioUrl }) => {
   };
 
   return (
-    <mesh ref={meshRef} onClick={handleClick}>
-      <icosahedronGeometry args={[4, 30]} />
-      <shaderMaterial
-        uniforms={uniforms}
-        wireframe
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-      />
-      <PositionalAudio
-        url={audioUrl}
-        distance={1}
-        loop
-        autoplay={false}
-        ref={audioRef}
-      />
-    </mesh>
+    <group>
+      <mesh ref={meshRef} onClick={handleClick}>
+        <icosahedronGeometry args={[4, 30]} />
+        <shaderMaterial
+          uniforms={uniforms}
+          wireframe
+          vertexShader={vertexShader}
+          fragmentShader={fragmentShader}
+        />
+        <PositionalAudio
+          url={audioUrl}
+          distance={1}
+          loop
+          autoplay={false}
+          ref={audioRef}
+        />
+      </mesh>
+
+      <mesh ref={innerMeshRef}>
+        <icosahedronGeometry args={[3.5, 13]} />
+        <meshBasicMaterial color="#AEDBF0" wireframe />
+      </mesh>
+    </group>
   );
 };
 
